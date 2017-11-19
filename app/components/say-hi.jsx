@@ -1,5 +1,17 @@
 import React from 'npm:react';
-import * as Button from 'npm:klarna/ui/Button'
+import ReactRouter from 'npm:react-router-dom';
+
+const {
+  Component
+} = React;
+
+
+const {
+  HashRouter,
+  Route,
+  Switch,
+  Link
+} = ReactRouter;
 
 const Home = () => (
   <div>
@@ -19,20 +31,25 @@ const Topic = ({ match }) => (
   </div>
 )
 
-export default class App extends React.Component {
+export default class App extends Component {
   constructor(props){
     super(props);
   }
 
   render() {
     return (
-      <div>
-        {this.props.name}
-        <Button.Primary size='small'>
-          Click me!
-        </Button.Primary>
-    </div>
+      <HashRouter>
+        <div>
+          <div className="routes">
+            <Link to="/">Home React</Link>
+            <Link to="/about">About React</Link>
+          </div>
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <Route path="/about" component={About}></Route>
+          </Switch>
+        </div>
+      </HashRouter>
     )
   }
 }
-
